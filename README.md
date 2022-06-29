@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Времето в твоя град
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект на Мартин Хараланов (F88226 Информатика). Проектът представлява уеб страница с прогноза за времето в шестта най-големи градове на територията на България.
 
-## Available Scripts
+### Инсталация
 
-In the project directory, you can run:
+За да изтеглите проекта от GitHub:
+`git clone https://github.com/BatHarry/CSCB854.git`
 
-### `npm start`
+За инсталирането на проекта:
+`npm install`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+За да заредите проекта:
+`npm start`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Технологии
 
-### `npm test`
+Като основа на проекта се използва библиотеката ReactJS. Комбинацията от React, Sass и архитектурни модели като BEM и Atomic design, позволява доброто структуриране на файловете на проекта, както и осигурява лесното допълване и разширяване на нови функционалности.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Данните използвани в сайта са от отворения API на [weatherapi](https://www.weatherapi.com/). Weatherapi предоставят прогнози за градове от целия свят, както и повечето големи градове в България. Услигите им се достъпват с секретен ключ, който се генерира при регистрация. За осъществяването на връзката между техните услуги и проекта се използва Javascript Fetch API.
 
-### `npm run build`
+```
+fetch(
+`http://api.weatherapi.com/v1/forecast.json?key=c1c5533361d94859a88204446222806&q=${cityEng}&days=3&aqi=no&alerts=no`,
+{
+	method:  "GET",
+	mode:  "cors",
+	headers:  {
+	"Access-Control-Allow-Origin":  "*",
+	},
+})
+.then((response)  =>  response.json())
+.then((weatherData)  =>  {
+	setWeatherData(weatherData);
+	setLoading(false);
+})
+.catch((error)  =>  console.log(error));
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Заявката се изпраща веднъж за всеки град, използвайки useEffect hook на ReactJS.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+При отваряне на сайта, първото нещо, което потребителя вижда е така наречения _hero banner_. С цел привличане на вниманието му, е използван дизайн със сигласувани цветов, по-нестандартни форми, както и два _call to action_ под формата на бутон и анимиран елемент, който цели да подкани потребителя да скролира надолу към прогнозите. Това е осъществено с помощта на `clip-path` css правилото
+`clip-path: polygon(0% 0%, 76% 0%, 94% 100%, 0% 100%);`
+и `@keyframes` за създаването на анимцията
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+@keyframes  scrollAnimation  {
+	from  {
+		top:  1px;
+	}
+	to  {
+		top:  40px;
+	}
+}
+```
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+За подредбата на картите с прогнозите е изплозвана grid система, имплементирана с помощта на `flexbox`, както и подредбата на елементи в самите карти.
