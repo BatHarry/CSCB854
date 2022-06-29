@@ -1,0 +1,95 @@
+@import "./colors.module.scss";
+
+.weather-slide {
+  min-width: 400px;
+  max-width: 400px;
+  height: 520px;
+  border-radius: 15px;
+  background-color: $highlightBlueTransparent2;
+  margin-bottom: 30px;
+
+  &__header {
+    h2 {
+      color: white;
+      font-weight: 900;
+      font-size: 30px;
+      text-align: center;
+      padding: 15px 0;
+    }
+  }
+
+  &__info {
+    height: 250px;
+    .today {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 0 15px;
+
+      &__icon,
+      &__current {
+        flex: 1;
+      }
+
+      &__hours {
+        margin-top: 15px;
+        width: 100%;
+        display: flex;
+
+        .hour {
+          flex: 1;
+          &__time,
+          &__degrees,
+          &__icon {
+            text-align: center;
+            color: white;
+          }
+        }
+      }
+
+      &__icon {
+        text-align: center;
+        img {
+          height: 128px;
+          width: 128px;
+        }
+        span {
+          color: white;
+        }
+      }
+
+      &__current {
+        text-align: center;
+      }
+
+      &__degrees {
+        color: white;
+        font-size: 70px;
+      }
+
+      &__wind {
+        color: white;
+        font-size: 18px;
+      }
+    }
+
+    .forecast {
+      width: 100%;
+      padding: 15px 15px;
+      &__date {
+        margin: 15px 0;
+        display: flex;
+        align-items: center;
+        p {
+          color: white;
+          flex: 1;
+          text-align: center;
+        }
+        img {
+          flex: 3;
+          max-width: 64px;
+        }
+      }
+    }
+  }
+}

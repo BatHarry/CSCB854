@@ -1,0 +1,18 @@
+@import "./colors.module.scss";
+
+.btn {
+  background-color: $highlightBlue;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 5px;
+  box-shadow: none;
+  border-style: none;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.5s;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $highlightBlueDark;
+  }
+}
